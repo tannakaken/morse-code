@@ -1,0 +1,169 @@
+import 'package:flutter/material.dart';
+import 'package:morse_coder/helpers/morse.helper.dart';
+import 'package:morse_coder/helpers/time.helper.dart';
+import 'package:torch_light/torch_light.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class LightingCancel {}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String _text = "";
+  bool _hasError = false;
+  bool _lighting = false;
+  void _onChangeText(String newText) {
+    if (stringToMorse(newText) == null) {
+      setState(() {
+        _hasError = true;
+      });
+    } else {
+      setState(() {
+        _text = newText;
+        _hasError = false;
+      });
+    }
+  }
+
+  void _showIndicatorDialog() {
+    setState(() {
+      _lighting = true;
+    });
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) {
+          return SimpleDialog(children: <Widget>[
+            const Center(child: Text("送信中", style: TextStyle(fontSize: 30.0))),
+            const SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: Center(
+                    child: CircularProgressIndicator(color: Colors.lightBlue))),
+            OutlinedButton(
+                onPressed: _hideIndicatorDialog, child: const Text("キャンセル"))
+          ]);
+        });
+  }
+
+  void _hideIndicatorDialog() {
+    setState(() {
+      _lighting = false;
+    });
+    Navigator.maybePop(context);
+  }
+
+  Future<void> checkAndSleep(int milliseconds) async {
+    if (!_lighting) {
+      throw LightingCancel();
+    }
+    await sleep(milliseconds);
+    if (!_lighting) {
+      throw LightingCancel();
+    }
+  }
+
+  Future<void> _torch() async {
+    var seq = stringToMorse(_text);
+    if (seq == null) {
+      return;
+    }
+    _showIndicatorDialog();
+    try {
+      for (var char in seq) {
+        for (var atom in char) {
+          await TorchLight.enableTorch();
+          switch (atom) {
+            case MorseAtom.dit:
+              await checkAndSleep(MORSE_UNIT_MILLISECONDS);
+              break;
+            case MorseAtom.dah:
+              await checkAndSleep(MORSE_LONG_MILLISECONDS);
+              break;
+          }
+          await TorchLight.disableTorch();
+          await checkAndSleep(MORSE_UNIT_MILLISECONDS);
+        }
+        await checkAndSleep(MORSE_BETWEEN_DURATION_MILLISECONDS);
+      }
+      _hideIndicatorDialog();
+    } on LightingCancel {
+      // 特に何もしない
+    } finally {
+      await TorchLight.disableTorch();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: const Text("モールス信号送受信機"),
+      ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'モールス信号にしたい文字列を入力してください。',
+            ),
+            const Text(
+              '（現在は英数字しか送受信できません。）',
+            ),
+            SizedBox(
+              height: 200,
+              child: TextField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                onChanged: _onChangeText,
+              ),
+            ),
+            Visibility(
+                visible: _hasError,
+                child: const Text("送信できない文字が含まれています。",
+                    style: TextStyle(color: Colors.red))),
+            Visibility(
+                visible: !_hasError,
+                child:
+                    ElevatedButton(onPressed: _torch, child: const Text("送信")))
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _torch,
+        tooltip: 'open camera',
+        child: const Icon(Icons.camera),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
