@@ -1,4 +1,6 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:morse_coder/camera_page.dart';
 import 'package:morse_coder/helpers/morse.helper.dart';
 import 'package:morse_coder/helpers/time.helper.dart';
 import 'package:torch_light/torch_light.dart';
@@ -90,14 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _torch() async {
-    var seq = stringToMorse(_text);
+    final seq = stringToMorse(_text);
     if (seq == null) {
       return;
     }
     _showIndicatorDialog();
     try {
-      for (var char in seq) {
-        for (var atom in char) {
+      for (final char in seq) {
+        for (final atom in char) {
           await TorchLight.enableTorch();
           switch (atom) {
             case MorseAtom.dit:
@@ -118,6 +120,14 @@ class _MyHomePageState extends State<MyHomePage> {
     } finally {
       await TorchLight.disableTorch();
     }
+  }
+
+  Future<void> _openCamera() async {
+    final cameras = await availableCameras();
+    final navigator = Navigator.of(context);
+    navigator.push(MaterialPageRoute(
+        builder: (context) => CameraPage(camera: cameras[0]),
+        fullscreenDialog: true));
   }
 
   @override
@@ -160,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _torch,
+        onPressed: _openCamera,
         tooltip: 'open camera',
         child: const Icon(Icons.camera),
       ), // This trailing comma makes auto-formatting nicer for build methods.
