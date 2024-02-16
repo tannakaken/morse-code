@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:morse_coder/camera_page.dart';
 import 'package:morse_coder/helpers/morse.helper.dart';
+import 'package:morse_coder/helpers/tflite.helper.dart';
 import 'package:morse_coder/helpers/time.helper.dart';
 import 'package:torch_light/torch_light.dart';
 
@@ -103,16 +104,16 @@ class _MyHomePageState extends State<MyHomePage> {
           await TorchLight.enableTorch();
           switch (atom) {
             case MorseAtom.dit:
-              await checkAndSleep(MORSE_UNIT_MILLISECONDS);
+              await checkAndSleep(morseUnitMilliseconds);
               break;
             case MorseAtom.dah:
-              await checkAndSleep(MORSE_LONG_MILLISECONDS);
+              await checkAndSleep(morseLongMilliseconds);
               break;
           }
           await TorchLight.disableTorch();
-          await checkAndSleep(MORSE_UNIT_MILLISECONDS);
+          await checkAndSleep(morseUnitMilliseconds);
         }
-        await checkAndSleep(MORSE_BETWEEN_DURATION_MILLISECONDS);
+        await checkAndSleep(morseBetweenDurationMilliseconds);
       }
       _hideIndicatorDialog();
     } on LightingCancel {
@@ -125,8 +126,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _openCamera() async {
     final cameras = await availableCameras();
     final navigator = Navigator.of(context);
+    final labels = await loadLabels();
+    final interpreter = await loadModel();
     navigator.push(MaterialPageRoute(
-        builder: (context) => CameraPage(camera: cameras[0]),
+        builder: (context) => CameraPage(
+              camera: cameras[0],
+              labels: labels,
+              interpreter: interpreter,
+            ),
         fullscreenDialog: true));
   }
 

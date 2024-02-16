@@ -10,7 +10,7 @@ enum MorseAtom {
 
 typedef MorseCharacter = List<MorseAtom>;
 
-const Map<String, MorseCharacter> MORSE_DICTIONARY = {
+const Map<String, MorseCharacter> morseDictionary = {
   "a": [MorseAtom.dah, MorseAtom.dit],
   "b": [MorseAtom.dah, MorseAtom.dit, MorseAtom.dit, MorseAtom.dit],
   "c": [MorseAtom.dah, MorseAtom.dit, MorseAtom.dah, MorseAtom.dit],
@@ -221,8 +221,8 @@ const Map<String, MorseCharacter> MORSE_DICTIONARY = {
 };
 
 MorseCharacter? charToMorse(String char) {
-  if (MORSE_DICTIONARY.containsKey(char)) {
-    return MORSE_DICTIONARY[char];
+  if (morseDictionary.containsKey(char)) {
+    return morseDictionary[char];
   } else {
     return null;
   }
@@ -246,6 +246,6 @@ MorseSequence? stringToMorse(String str) {
   return charsToMorse(str.split(''));
 }
 
-const MORSE_UNIT_MILLISECONDS = 200;
-const MORSE_LONG_MILLISECONDS = 600;
-const MORSE_BETWEEN_DURATION_MILLISECONDS = 600;
+const morseUnitMilliseconds = 200;
+const morseLongMilliseconds = 600;
+const morseBetweenDurationMilliseconds = 600;
