@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:morse_coder/camera_page.dart';
 import 'package:morse_coder/helpers/morse.helper.dart';
-import 'package:morse_coder/helpers/tflite.helper.dart';
 import 'package:morse_coder/helpers/time.helper.dart';
 import 'package:torch_light/torch_light.dart';
 
@@ -123,18 +122,15 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future<void> _openCamera() async {
-    final cameras = await availableCameras();
-    final navigator = Navigator.of(context);
-    final labels = await loadLabels();
-    final interpreter = await loadModel();
-    navigator.push(MaterialPageRoute(
-        builder: (context) => CameraPage(
-              camera: cameras[0],
-              labels: labels,
-              interpreter: interpreter,
-            ),
-        fullscreenDialog: true));
+  void _openCamera() {
+    availableCameras().then((cameras) {
+      final navigator = Navigator.of(context);
+      navigator.push(MaterialPageRoute(
+          builder: (context) => CameraPage(
+                camera: cameras[0],
+              ),
+          fullscreenDialog: true));
+    });
   }
 
   @override
@@ -170,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text("送信できない文字が含まれています。",
                     style: TextStyle(color: Colors.red))),
             Visibility(
-                visible: !_hasError,
+                visible: !_hasError && _text.isNotEmpty,
                 child:
                     ElevatedButton(onPressed: _torch, child: const Text("送信")))
           ],
@@ -179,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _openCamera,
         tooltip: 'open camera',
-        child: const Icon(Icons.camera),
+        child: const Icon(Icons.camera_alt),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

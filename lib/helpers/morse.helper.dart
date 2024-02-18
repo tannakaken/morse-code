@@ -247,5 +247,24 @@ MorseSequence? stringToMorse(String str) {
 }
 
 const morseUnitMilliseconds = 200;
-const morseLongMilliseconds = 600;
-const morseBetweenDurationMilliseconds = 600;
+const morseLongMilliseconds = morseUnitMilliseconds * 3;
+const morseBetweenDurationMilliseconds = morseUnitMilliseconds * 3;
+
+String reverseKey(MorseCharacter morseCharacter) {
+  return morseCharacter.map((atom) => atom.display).join();
+}
+
+Map<String, String> makeReverseDictionary(
+    Map<String, MorseCharacter> dictionary) {
+  final Map<String, String> result = {};
+  dictionary.forEach((key, morseCharacter) {
+    result[reverseKey(morseCharacter)] = key;
+  });
+  return result;
+}
+
+final reverseDictionary = makeReverseDictionary(morseDictionary);
+
+String? morseToChar(MorseCharacter morseCharacter) {
+  return reverseDictionary[reverseKey(morseCharacter)];
+}
