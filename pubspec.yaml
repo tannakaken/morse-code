@@ -38,6 +38,7 @@ dependencies:
   torch_light: ^1.0.0
   camera: ^0.10.5+9
   fluttertoast: ^8.2.4
+  url_launcher: ^6.2.4
 
 dev_dependencies:
   flutter_test:

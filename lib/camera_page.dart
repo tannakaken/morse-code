@@ -189,19 +189,39 @@ class _CameraState extends State<CameraPage> {
         ),
         Text(_on ? "ON" : "OFF"),
         Text(_currentMorse),
+        SelectableText(_result),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SelectableText(_result),
             Visibility(
                 visible: _result.isNotEmpty,
                 child: IconButton(
                     onPressed: () {
-                      setState(() {
-                        _result = "";
-                      });
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text("受信データ消去"),
+                              content: const Text("受信データを消去していいですか？"),
+                              actions: [
+                                TextButton(
+                                  child: const Text("Cancel"),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                                TextButton(
+                                  child: const Text("OK"),
+                                  onPressed: () {
+                                    setState(() {
+                                      _result = "";
+                                    });
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          });
                     },
-                    icon: const Icon(Icons.cancel_outlined))),
+                    icon: const Icon(Icons.clear))),
             Visibility(
                 visible: _result.isNotEmpty,
                 child: IconButton(
@@ -235,7 +255,8 @@ class _CameraState extends State<CameraPage> {
           },
           child: FloatingActionButton(
             onPressed: () {},
-            tooltip: 'start',
+            heroTag: 'start_input',
+            tooltip: '受信開始',
             child: const Icon(Icons.camera),
           )),
     );

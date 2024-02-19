@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:morse_coder/about_page.dart';
 import 'package:morse_coder/camera_page.dart';
 import 'package:morse_coder/helpers/morse.helper.dart';
 import 'package:morse_coder/helpers/time.helper.dart';
@@ -16,11 +17,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'モールス送受信',
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
+      home: const MyHomePage(title: 'モールス送受信'),
     );
   }
 }
@@ -37,20 +38,15 @@ class MyHomePage extends StatefulWidget {
 class LightingCancel {}
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _controller = TextEditingController();
   String _text = "";
   bool _hasError = false;
   bool _lighting = false;
   void _onChangeText(String newText) {
-    if (stringToMorse(newText) == null) {
-      setState(() {
-        _hasError = true;
-      });
-    } else {
-      setState(() {
-        _text = newText;
-        _hasError = false;
-      });
-    }
+    setState(() {
+      _text = newText;
+      _hasError = stringToMorse(newText) == null;
+    });
   }
 
   void _showIndicatorDialog() {
@@ -133,13 +129,29 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _openAbout() {
+    final navigator = Navigator.of(context);
+    navigator.push(MaterialPageRoute(
+        builder: (context) => const AboutPage(), fullscreenDialog: true));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: const Text("モールス信号送受信機"),
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: Colors.white),
+        ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: _openAbout,
+            icon: const Icon(Icons.question_mark_outlined),
+            color: Colors.white,
+            tooltip: "このアプリについて",
+          ),
+        ],
+        backgroundColor: Colors.blue,
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -151,20 +163,41 @@ class _MyHomePageState extends State<MyHomePage> {
               'モールス信号にしたい文字列を入力してください。',
             ),
             const Text(
-              '（現在は英数字しか送受信できません。）',
+              '（現在は英数字と一部の記号しか送受信できません。）',
             ),
             SizedBox(
               height: 200,
               child: TextField(
+                controller: _controller,
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 onChanged: _onChangeText,
+                decoration: InputDecoration(
+                    suffixIcon: Visibility(
+                        visible: _text.isNotEmpty,
+                        child: IconButton(
+                          onPressed: () {
+                            _controller.clear();
+                            setState(() {
+                              _text = "";
+                              _hasError = false;
+                            });
+                          },
+                          icon: const Icon(Icons.clear),
+                        )),
+                    labelText: "送信文字列",
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (_) {
+                        final Color color = _hasError
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1.3);
+                      },
+                    ),
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    errorText: _hasError ? "送信できない文字が含まれています。" : null),
               ),
             ),
-            Visibility(
-                visible: _hasError,
-                child: const Text("送信できない文字が含まれています。",
-                    style: TextStyle(color: Colors.red))),
             Visibility(
                 visible: !_hasError && _text.isNotEmpty,
                 child:
@@ -173,8 +206,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'camera',
         onPressed: _openCamera,
-        tooltip: 'open camera',
+        tooltip: '受信用カメラ',
         child: const Icon(Icons.camera_alt),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
