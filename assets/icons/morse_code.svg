@@ -32,7 +32,7 @@
      inkscape:cy="234.9935"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
@@ -67,38 +67,38 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:74.6378px;line-height:1.25;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.86595"
-       x="14.293743"
-       y="49.643829"
-       id="text21920"
-       transform="scale(0.7722598,1.294901)"><tspan
-         sodipodi:role="line"
-         id="tspan21918"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:74.6378px;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1.86595"
-         x="14.293743"
-         y="49.643829">ーーー</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:74.6378px;line-height:1.25;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.86595"
-       x="14.466894"
-       y="114.28615"
+       x="13.781675"
+       y="82.411163"
        id="text21920-1"
        transform="scale(0.7722598,1.294901)"><tspan
          sodipodi:role="line"
          id="tspan21918-1"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:74.6378px;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1.86595"
-         x="14.466894"
-         y="114.28615">ーーー</tspan></text>
+         x="13.781675"
+         y="82.411163">ーーー</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.8519px;line-height:1.25;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.74631"
        x="9.6705523"
-       y="102.09122"
+       y="56.635712"
        id="text21920-7"
        transform="scale(1.0873447,0.91967156)"><tspan
          sodipodi:role="line"
          id="tspan21918-6"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.8519px;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1.74631"
          x="9.6705523"
-         y="102.09122">・・・</tspan></text>
+         y="56.635712">・・・</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.8519px;line-height:1.25;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.74631"
+       x="9.1673164"
+       y="147.08131"
+       id="text21920-7-4"
+       transform="scale(1.0873447,0.91967156)"><tspan
+         sodipodi:role="line"
+         id="tspan21918-6-0"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.8519px;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1.74631"
+         x="9.1673164"
+         y="147.08131">・・・</tspan></text>
   </g>
 </svg>
