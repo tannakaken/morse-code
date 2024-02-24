@@ -249,6 +249,7 @@ MorseSequence? stringToMorse(String str) {
 const morseUnitMilliseconds = 200;
 const morseLongMilliseconds = morseUnitMilliseconds * 3;
 const morseBetweenDurationMilliseconds = morseUnitMilliseconds * 3;
+const morseLongDurationMilliseconds = morseUnitMilliseconds * 7;
 
 String reverseKey(MorseCharacter morseCharacter) {
   return morseCharacter.map((atom) => atom.display).join();

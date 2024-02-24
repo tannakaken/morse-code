@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _text = "";
   bool _hasError = false;
   bool _lighting = false;
+  bool _looping = false;
   void _onChangeText(String newText) {
     setState(() {
       _text = newText;
@@ -54,9 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
       _lighting = true;
     });
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) {
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return StatefulBuilder(builder: (context, setState) {
           return SimpleDialog(children: <Widget>[
             const Center(child: Text("送信中", style: TextStyle(fontSize: 30.0))),
             const SizedBox(
@@ -64,15 +66,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 50.0,
                 child: Center(
                     child: CircularProgressIndicator(color: Colors.lightBlue))),
+            CheckboxListTile(
+              value: _looping,
+              onChanged: (_) {
+                setState(() {
+                  _looping = !_looping;
+                });
+              },
+              title: const Text("ループ"),
+              secondary: const Icon(Icons.loop_rounded),
+            ),
             OutlinedButton(
-                onPressed: _hideIndicatorDialog, child: const Text("キャンセル"))
+                onPressed: _hideIndicatorDialog, child: const Text("停止")),
           ]);
         });
+      },
+    );
   }
 
   void _hideIndicatorDialog() {
     setState(() {
       _lighting = false;
+      _looping = false;
     });
     Navigator.maybePop(context);
   }
@@ -94,21 +109,28 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     _showIndicatorDialog();
     try {
-      for (final char in seq) {
-        for (final atom in char) {
-          await TorchLight.enableTorch();
-          switch (atom) {
-            case MorseAtom.dit:
-              await checkAndSleep(morseUnitMilliseconds);
-              break;
-            case MorseAtom.dah:
-              await checkAndSleep(morseLongMilliseconds);
-              break;
+      while (true) {
+        for (final char in seq) {
+          for (final atom in char) {
+            await TorchLight.enableTorch();
+            switch (atom) {
+              case MorseAtom.dit:
+                await checkAndSleep(morseUnitMilliseconds);
+                break;
+              case MorseAtom.dah:
+                await checkAndSleep(morseLongMilliseconds);
+                break;
+            }
+            await TorchLight.disableTorch();
+            await checkAndSleep(morseUnitMilliseconds);
           }
-          await TorchLight.disableTorch();
-          await checkAndSleep(morseUnitMilliseconds);
+          await checkAndSleep(morseBetweenDurationMilliseconds);
         }
-        await checkAndSleep(morseBetweenDurationMilliseconds);
+        if (_looping) {
+          await checkAndSleep(morseLongDurationMilliseconds);
+        } else {
+          break;
+        }
       }
       _hideIndicatorDialog();
     } on LightingCancel {
