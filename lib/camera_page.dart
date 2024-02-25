@@ -172,13 +172,29 @@ class _CameraState extends State<CameraPage> {
                         height: size,
                         child: CameraPreview(_controller)))),
             Positioned(
+                top: _started ? size / 2 - 30 : size / 2 - 50,
+                width: size,
+                child: _started
+                    ? const Text(
+                        "受信中",
+                        style: TextStyle(color: Colors.blue),
+                        textAlign: TextAlign.center,
+                      )
+                    : const Text(
+                        "明滅する光源を四角の中に入れ\n暗いタイミングで右下のボタンを押す",
+                        style: TextStyle(color: Colors.yellow),
+                        textAlign: TextAlign.center,
+                      )),
+            Positioned(
                 top: size / 2 - 10,
                 left: size / 2 - 10,
                 child: Container(
                     width: 20,
                     height: 20,
                     decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: Colors.blue))))
+                        border: Border.all(
+                            width: 1,
+                            color: _started ? Colors.blue : Colors.yellow))))
           ],
         ),
         Slider(
@@ -187,7 +203,7 @@ class _CameraState extends State<CameraPage> {
           min: 1.0,
           max: _maxZoom,
         ),
-        Text(_on ? "ON" : "OFF"),
+        Text(_started ? (_on ? "明" : "暗") : ""),
         Text(_currentMorse),
         SelectableText(_result),
         Row(
@@ -221,7 +237,10 @@ class _CameraState extends State<CameraPage> {
                             );
                           });
                     },
-                    icon: const Icon(Icons.clear))),
+                    icon: const Icon(
+                      Icons.clear,
+                      semanticLabel: "受信文字列消去",
+                    ))),
             Visibility(
                 visible: _result.isNotEmpty,
                 child: IconButton(
@@ -238,27 +257,33 @@ class _CameraState extends State<CameraPage> {
                             fontSize: 16.0);
                       }
                     },
-                    icon: const Icon(Icons.copy_all_outlined)))
+                    icon: const Icon(
+                      Icons.copy_all_outlined,
+                      semanticLabel: "受信文字列コピー",
+                    )))
           ],
         ),
         ElevatedButton(
             onPressed: () => Navigator.maybePop(context),
             child: const Text("戻る")),
       ]),
-      floatingActionButton: GestureDetector(
-          onTapDown: (_) {
-            _started = true;
-          },
-          onTapUp: (_) {
-            _started = false;
-            _threshold = null;
-          },
-          child: FloatingActionButton(
-            onPressed: () {},
-            heroTag: 'start_input',
-            tooltip: '受信開始',
-            child: const Icon(Icons.camera),
-          )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (_started) {
+            setState(() {
+              _started = false;
+              _threshold = null;
+            });
+          } else {
+            setState(() {
+              _started = true;
+            });
+          }
+        },
+        heroTag: 'toggle_input',
+        tooltip: _started ? '受信開始' : "受信終了",
+        child: _started ? const Icon(Icons.stop) : const Icon(Icons.camera),
+      ),
     );
   }
 }

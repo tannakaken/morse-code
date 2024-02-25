@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'モールス送受信',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
@@ -205,7 +206,10 @@ class _MyHomePageState extends State<MyHomePage> {
                               _hasError = false;
                             });
                           },
-                          icon: const Icon(Icons.clear),
+                          icon: const Icon(
+                            Icons.clear,
+                            semanticLabel: "送信文字列消去",
+                          ),
                         )),
                     labelText: "送信文字列",
                     floatingLabelStyle: MaterialStateTextStyle.resolveWith(
