@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1024"
+   height="500"
+   viewBox="0 0 270.93333 132.29167"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="feature_graphic.svg"
+   inkscape:export-filename="D:\programs\dart\morse_coder\assets\feature_graphic.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="0.73406285"
+     inkscape:cx="396.42382"
+     inkscape:cy="234.9935"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1962" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1959" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="m 34.507996,20.654507 c -1.276299,0.156581 -2.730313,0.751588 -3.505786,1.456202 -0.710855,0.657638 -1.405549,2.082523 -1.631729,3.366485 -0.113088,0.751588 -0.161558,12.839622 -0.129245,42.621281 l 0.04847,41.572195 0.420047,1.04909 c 0.226181,0.56369 0.646229,1.31527 0.920879,1.6441 0.597758,0.73592 2.03562,1.50317 3.23114,1.7537 0.597763,0.12527 6.33304,0.17224 18.966807,0.17224 19.45148,0 19.03144,0.0157 20.66316,-0.7829 0.82393,-0.42277 1.84175,-1.58147 2.27795,-2.64622 l 0.37158,-0.87685 0.0485,-18.680085 c 0.0323,-16.33138 0.0646,-18.66443 0.27465,-18.66443 0.37159,0 0.35543,-11.508685 0,-11.649604 -0.19386,-0.06262 -0.24233,-0.422769 -0.24233,-1.894628 0,-1.503175 0.0485,-1.800681 0.24233,-1.800681 0.21003,0 0.24234,-0.422769 0.24234,-2.818453 0,-2.380027 -0.0323,-2.818453 -0.24234,-2.818453 -0.19386,0 -0.24233,-1.738047 -0.27465,-13.356338 -0.0485,-12.557777 -0.0646,-13.387654 -0.35541,-14.139242 -0.75932,-2.051207 -2.39106,-3.209906 -4.94366,-3.507409 -1.61557,-0.187897 -34.718626,-0.187897 -36.382663,0 z M 74.606479,68.098475 V 105.67786 H 52.715486 30.824495 V 68.098475 30.519095 h 21.890991 21.890993 z"
+       id="path830"
+       style="fill:#000000;stroke:none;stroke-width:0.0159049" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="37.485435"
+       y="73.889557"
+       id="text2054"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff0000;stroke-width:0.264583"
+         x="37.485435"
+         y="73.889557"
+         id="tspan2056">SOS</tspan></text>
+    <path
+       d="m 203.67256,20.821826 c -1.2763,0.156581 -2.73032,0.751588 -3.5058,1.456202 -0.71086,0.657638 -1.40556,2.082523 -1.63174,3.366485 -0.11309,0.751588 -0.16156,12.839622 -0.12925,42.621187 l 0.0485,41.57201 0.42004,1.04909 c 0.22619,0.56369 0.64624,1.31527 0.92089,1.6441 0.59776,0.73592 2.03563,1.50317 3.23116,1.7537 0.59776,0.12527 6.33307,0.17224 18.96691,0.17224 19.45159,0 19.03155,0.0157 20.66328,-0.7829 0.82393,-0.42277 1.84176,-1.58147 2.27796,-2.64622 l 0.37158,-0.87685 0.0485,-18.680039 c 0.0323,-16.33128 0.0646,-18.664325 0.27465,-18.664325 0.37159,0 0.35543,-11.508614 0,-11.649534 -0.19386,-0.0626 -0.24233,-0.422767 -0.24233,-1.894621 0,-1.503161 0.0485,-1.800668 0.24233,-1.800668 0.21003,0 0.24234,-0.422767 0.24234,-2.818435 0,-2.380015 -0.0323,-2.818432 -0.24234,-2.818432 -0.19386,0 -0.24233,-1.738048 -0.27465,-13.356339 -0.0485,-12.557777 -0.0646,-13.387654 -0.35541,-14.139242 -0.75932,-2.051207 -2.39107,-3.209906 -4.94369,-3.507409 -1.61558,-0.187897 -34.71882,-0.187897 -36.38287,0 z M 243.77127,68.26569 V 105.8449 H 221.88016 199.98904 V 68.26569 30.686414 h 21.89112 21.89111 z"
+       id="path830-9"
+       style="fill:#000000;stroke:none;stroke-width:0.0159049" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="206.6483"
+       y="74.056908"
+       id="text2054-7"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff0000;stroke-width:0.264583"
+         x="206.6483"
+         y="74.056908"
+         id="tspan2056-0">SOS</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.917858;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="M 91.190534,66.320389 H 185.93083"
+       id="path1957" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.81944px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="94.725967"
+       y="58.145931"
+       id="text11317"><tspan
+         sodipodi:role="line"
+         id="tspan12199"
+         x="94.725967"
+         y="58.145931">・・・ －－－ ・・・</tspan></text>
+  </g>
+</svg>
