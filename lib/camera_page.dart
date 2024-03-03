@@ -87,7 +87,10 @@ class _CameraState extends State<CameraPage> {
             }
           }
           final int luminanceAverage = luminanceSum ~/ count;
-          _threshold ??= (255 + luminanceAverage) ~/ 2;
+          // 受信開始時の明るさから、閾値を決める
+          // androidでは最大明るさとの平均を求めていたが、
+          // iosではそれだと光を検知できないので2:1で分割した。
+          _threshold ??= (255 + 2 * luminanceAverage) ~/ 3; // TODO androidでもこの計算でうまくいくか確かめる。
           final bool on = luminanceAverage > threshold();
           if (!on && !_on) {
             // ずっとoff
