@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:morse_coder/about_page.dart';
@@ -41,6 +43,8 @@ class LightingCancel {}
 
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _controller = TextEditingController();
+  final FlutterWatchOsConnectivity _flutterWatchOsConnectivity =
+      FlutterWatchOsConnectivity();
   String _text = "";
   bool _hasError = false;
   bool _lighting = false;
@@ -50,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _text = newText;
       _hasError = stringToMorse(newText) == null;
     });
+    sendMessage(newText);
   }
 
   void _showIndicatorDialog() {
@@ -157,6 +162,31 @@ class _MyHomePageState extends State<MyHomePage> {
     final navigator = Navigator.of(context);
     navigator.push(MaterialPageRoute(
         builder: (context) => const AboutPage(), fullscreenDialog: true));
+  }
+
+  Future<void> sendMessage(String txt) async {
+    if (Platform.isIOS) {
+      bool isReachable = await _flutterWatchOsConnectivity.getReachability();
+      if (isReachable) {
+        await _flutterWatchOsConnectivity.sendMessage({"code": txt});
+      } else {
+        debugPrint("no associated watch");
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isIOS) {
+      _flutterWatchOsConnectivity.configureAndActivateSession();
+      _flutterWatchOsConnectivity.activationStateChanged
+          .listen((activationState) {
+        if (activationState == ActivationState.activated) {
+          sendMessage(_text);
+        }
+      });
+    }
   }
 
   @override
