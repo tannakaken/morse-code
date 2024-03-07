@@ -5,6 +5,7 @@ import 'package:morse_coder/camera_page.dart';
 import 'package:morse_coder/helpers/morse.helper.dart';
 import 'package:morse_coder/helpers/time.helper.dart';
 import 'package:torch_light/torch_light.dart';
+import 'package:flutter_watch_os_connectivity/flutter_watch_os_connectivity.dart';
 
 void main() {
   runApp(const MyApp());
