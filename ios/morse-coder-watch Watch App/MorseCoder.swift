@@ -1,16 +1,20 @@
-enum MorseAtom {
-  dah("−"),
-  dit("·"),
-  ;
+//
+//  MorseCoder.swift
+//  Runner
+//
+//  Created by 田中健策 on 2024/03/07.
+//
 
-  const MorseAtom(this.display);
+import Foundation
 
-  final String display;
+enum MorseAtom: Int {
+    case dit = 0
+    case dah = 1
 }
 
-typedef MorseCharacter = List<MorseAtom>;
+typealias MorseCharacter = Array<MorseAtom>
 
-const Map<String, MorseCharacter> morseDictionary = {
+let MORSE_DICTIONARY: Dictionary<String, MorseCharacter> = [
   "a": [MorseAtom.dah, MorseAtom.dit],
   "b": [MorseAtom.dah, MorseAtom.dit, MorseAtom.dit, MorseAtom.dit],
   "c": [MorseAtom.dah, MorseAtom.dit, MorseAtom.dah, MorseAtom.dit],
@@ -218,54 +222,36 @@ const Map<String, MorseCharacter> morseDictionary = {
     MorseAtom.dit
   ],
   " ": [],
-};
+];
 
-MorseCharacter? charToMorse(String char) {
-  if (morseDictionary.containsKey(char)) {
-    return morseDictionary[char];
-  } else {
-    return null;
-  }
-}
-
-typedef MorseSequence = List<MorseCharacter>;
-
-MorseSequence? charsToMorse(List<String> chars) {
-  MorseSequence result = [];
-  for (var char in chars) {
-    var morse = charToMorse(char);
-    if (morse == null) {
-      return null;
+func charToMorse(char: String) -> MorseCharacter? {
+    if MORSE_DICTIONARY.keys.contains(char) {
+        return MORSE_DICTIONARY[char]
     }
-    result.add(morse);
-  }
-  return result;
+    return nil
 }
 
-MorseSequence? stringToMorse(String str) {
-  return charsToMorse(str.split(""));
+typealias MorseSequence = Array<MorseCharacter>
+
+func charsToMorse(chars: Array<String>) -> MorseSequence? {
+    var result: MorseSequence = []
+    for char in chars {
+        if let morseChar = charToMorse(char: char) {
+            result.append(morseChar)
+        } else {
+            return nil
+        }
+    }
+    return result
 }
 
-const morseUnitMilliseconds = 200;
-const morseLongMilliseconds = morseUnitMilliseconds * 3;
-const morseBetweenDurationMilliseconds = morseUnitMilliseconds * 3;
-const morseLongDurationMilliseconds = morseUnitMilliseconds * 7;
-
-String reverseKey(MorseCharacter morseCharacter) {
-  return morseCharacter.map((atom) => atom.display).join();
+func stingToMorse(string: String) -> MorseSequence? {
+    return charsToMorse(chars: string.split(separator: "").map({(substring) in
+        return String(substring)
+    }))
 }
 
-Map<String, String> makeReverseDictionary(
-    Map<String, MorseCharacter> dictionary) {
-  final Map<String, String> result = {};
-  dictionary.forEach((key, morseCharacter) {
-    result[reverseKey(morseCharacter)] = key;
-  });
-  return result;
-}
-
-final reverseDictionary = makeReverseDictionary(morseDictionary);
-
-String? morseToChar(MorseCharacter morseCharacter) {
-  return reverseDictionary[reverseKey(morseCharacter)];
-}
+let MORSE_UNIT_SECONDS = 0.2
+let MORSE_LONG_SECONDS = MORSE_UNIT_SECONDS * 3
+let MORSE_BETWEEN_DURATION_SECONDS = MORSE_UNIT_SECONDS * 3
+let MORSE_LONG_BETWEEN_DURATION_SECONDS = MORSE_UNIT_SECONDS * 7

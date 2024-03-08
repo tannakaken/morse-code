@@ -1,13 +1,13 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
-import 'package:morse_coder/about_page.dart';
-import 'package:morse_coder/camera_page.dart';
-import 'package:morse_coder/helpers/morse.helper.dart';
-import 'package:morse_coder/helpers/time.helper.dart';
-import 'package:torch_light/torch_light.dart';
-import 'package:flutter_watch_os_connectivity/flutter_watch_os_connectivity.dart';
+import "package:camera/camera.dart";
+import "package:flutter/material.dart";
+import "package:morse_coder/about_page.dart";
+import "package:morse_coder/camera_page.dart";
+import "package:morse_coder/helpers/morse.helper.dart";
+import "package:morse_coder/helpers/time.helper.dart";
+import "package:torch_light/torch_light.dart";
+import "package:flutter_watch_os_connectivity/flutter_watch_os_connectivity.dart";
 
 void main() {
   runApp(const MyApp());
@@ -20,12 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'モールス送受信',
+      title: "モールス送受信",
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: const MyHomePage(title: 'モールス送受信'),
+      home: const MyHomePage(title: "モールス送受信"),
     );
   }
 }
@@ -214,10 +214,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'モールス信号にしたい文字列を入力してください。',
+              "モールス信号にしたい文字列を入力してください。",
             ),
             const Text(
-              '（現在は英数字と一部の記号しか送受信できません。）',
+              "（現在は英数字と一部の記号しか送受信できません。）",
             ),
             SizedBox(
               height: 200,
@@ -263,9 +263,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'camera',
+        heroTag: "camera",
         onPressed: _openCamera,
-        tooltip: '受信用カメラ',
+        tooltip: "受信用カメラ",
         child: const Icon(Icons.camera_alt),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
