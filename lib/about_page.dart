@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -22,7 +24,7 @@ class AboutPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   const Text("このアプリはモールス信号を光を使って送受信するアプリです"),
-                  const Text("現在は英数字と一部の記号しか送受信できません。"),
+                  const Text("現在は英数字と一部の記号しか送受信できません。また大文字小文字は無視されます。"),
                   const Text(
                       "入力欄に送信したい文字を入力して、入力欄の下の送信ボタンを押すと端末のライトが明滅してモールス信号を送信します。"),
                   const Text("受信する場合は、右下のカメラボタンを押してカメラを起動します。"),
@@ -31,6 +33,10 @@ class AboutPage extends StatelessWidget {
                       "光源が暗いタイミングで右下のボタンを押すと、受信を始めます（現状それほど精度は高くありません）。"),
                   const Text("コピーアイコンを押せば、受信した文字列をコピーできます。"),
                   const Text("間違った文字列を受信した場合は、クリアアイコンで消去できます。"),
+                  Platform.isIOS
+                      ? const Text(
+                          "Apple Watchとリンクされていれば、Apple Watchで送信することもできます。")
+                      : const Text(""),
                   const Text(""),
                   Container(
                       margin: const EdgeInsets.all(profileMargin),

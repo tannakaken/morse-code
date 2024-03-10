@@ -50,9 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _lighting = false;
   bool _looping = false;
   void _onChangeText(String newText) {
+    final normalized = newText.toLowerCase();
     setState(() {
-      _text = newText;
-      _hasError = stringToMorse(newText) == null;
+      _text = normalized;
+      _hasError = stringToMorse(normalized) == null;
     });
     sendMessage(newText);
   }
@@ -99,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.maybePop(context);
   }
 
-  Future<void> checkAndSleep(int milliseconds) async {
+  Future<void> _checkAndSleep(int milliseconds) async {
     if (!_lighting) {
       throw LightingCancel();
     }
@@ -122,19 +123,19 @@ class _MyHomePageState extends State<MyHomePage> {
             await TorchLight.enableTorch();
             switch (atom) {
               case MorseAtom.dit:
-                await checkAndSleep(morseUnitMilliseconds);
+                await _checkAndSleep(morseUnitMilliseconds);
                 break;
               case MorseAtom.dah:
-                await checkAndSleep(morseLongMilliseconds);
+                await _checkAndSleep(morseLongMilliseconds);
                 break;
             }
             await TorchLight.disableTorch();
-            await checkAndSleep(morseUnitMilliseconds);
+            await _checkAndSleep(morseUnitMilliseconds);
           }
-          await checkAndSleep(morseBetweenDurationMilliseconds);
+          await _checkAndSleep(morseBetweenDurationMilliseconds);
         }
         if (_looping) {
-          await checkAndSleep(morseLongDurationMilliseconds);
+          await _checkAndSleep(morseLongDurationMilliseconds);
         } else {
           break;
         }
